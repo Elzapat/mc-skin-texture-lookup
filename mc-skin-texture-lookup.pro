@@ -6,7 +6,7 @@ TEMPLATE = app
 TARGET = mc-skin-texture-lookup
 INCLUDEPATH += .
 
-QT += widgets network
+QT += widgets network core
 
 # You can make your code fail to compile if you use deprecated APIs.
 # In order to do so, uncomment the following line.
