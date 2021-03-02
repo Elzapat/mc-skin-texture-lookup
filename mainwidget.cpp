@@ -9,7 +9,6 @@
 #include "mainwidget.h"
 
 MainWidget::MainWidget(QWidget* parent) : QWidget(parent), m_phase(0) {
-
     this->setWindowTitle(tr("Minecraft Skin Texture Lookup"));
     this->setMinimumWidth(600);
     this->setMinimumHeight(200);
@@ -36,7 +35,6 @@ MainWidget::MainWidget(QWidget* parent) : QWidget(parent), m_phase(0) {
 }
 
 MainWidget::~MainWidget() {
-
     delete m_searchButton;
     delete m_input;
     delete m_output;
@@ -44,8 +42,8 @@ MainWidget::~MainWidget() {
 }
 
 void MainWidget::inputEntered() {
-
     m_output->clear();
+    m_output->append(tr("Loading..."));
     QString username = m_input->text();
 
     const QUrl url("https://api.mojang.com/users/profiles/minecraft/" + username);
@@ -54,7 +52,6 @@ void MainWidget::inputEntered() {
 }
 
 void MainWidget::onReply(QNetworkReply* reply) {
-
     if (m_reply->error() != QNetworkReply::NoError) {
         m_output->append("Error (this username most likely doesn't exist)");
         return;
@@ -93,6 +90,7 @@ void MainWidget::onReply(QNetworkReply* reply) {
         QStringList explodedUrl = textureUrl.split('/');
         QString skinTexture = explodedUrl.at(explodedUrl.size() - 1);
 
+        m_output->clear();
         m_output->append(m_input->text() + "'s skin texture:\n");
         m_output->append(skinTexture);
 
